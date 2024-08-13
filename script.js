@@ -2,72 +2,60 @@ function getComputerChoice(){
 let computerChoice = "";
 let computerChoiceNumber = Math.floor(Math.random() * 3) + 1;
 
-if(computerChoiceNumber === 1){
-    return computerChoice = "Rock";
-}
-else if(computerChoiceNumber === 2){
-    return computerChoice = "Paper"
-}
-else{
-    return computerChoice = "Scissors"
-}
-}
-
-function getHumanChoice(){
-let humanChoice = prompt("What's your choice? (only valid values: Rock, Paper or Scissors): ");
-return humanChoice;
-}
-
-function playGame(){
-    let humanScore = 0;
-    let computerScore = 0;
-
-    for(let i = 0; i < 5; i++){
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-
-        playRound(humanSelection, computerSelection);
-
-        function playRound(humanChoice, computerChoice){
-            if(humanChoice === "Rock" && computerChoice === "Paper"){
-                console.log("You lose! Paper beats Rock!");
-                computerScore++;
-            }
-            else if(humanChoice === "Paper" && computerChoice === "Scissors"){
-                console.log("You lose! Scissors beats Paper!");
-                computerScore++;
-            }
-            else if(humanChoice === "Scissors" && computerChoice === "Rock"){
-                console.log("You lose! Rock beats Scissors!");
-                computerScore++;
-            }
-            else if(computerChoice === "Rock" && humanChoice === "Paper"){
-                console.log("You win! Paper beats Rock!");
-                humanScore++;
-            }
-            else if(computerChoice === "Paper" && humanChoice === "Scissors"){
-                console.log("You win! Scissors beats Paper!");
-                humanScore++;
-            }
-            else if(computerChoice === "Scissors" && humanChoice === "Rock"){
-                console.log("You win! Rock beats Scissors!");
-                humanScore++;
-            }
-            else{
-                console.log("Draw!")
-            }
-        }
+    if(computerChoiceNumber === 1){
+        return computerChoice = "Rock";
     }
-
-    if(humanScore > computerScore){
-        alert("Human Wins!")
-    }
-    else if(humanScore === computerScore){
-        alert("Game Draw!")
+    else if(computerChoiceNumber === 2){
+        return computerChoice = "Paper"
     }
     else{
-        alert("Computer Wins!")
+        return computerChoice = "Scissors"
     }
 }
 
-playGame();
+let humanScore = 0;
+let computerScore = 0;
+
+function playRound(humanChoice){
+    const humanSelection = humanChoice;
+    const computerSelection = getComputerChoice();
+
+    let score = document.getElementById("score");
+
+    if(humanSelection === "Rock" && computerSelection === "Paper"){
+        computerScore++;
+        score.textContent = "Human Score: " + humanScore + " Computer Score: " + computerScore;
+    }
+    else if(humanSelection === "Paper" && computerSelection === "Scissors"){
+        computerScore++;
+        score.textContent = "Human Score: " + humanScore + "Computer Score:" + computerScore;
+    }
+    else if(humanSelection === "Scissors" && computerSelection === "Rock"){
+        computerScore++;
+        score.textContent = "Human Score: " + humanScore + "Computer Score:" + computerScore;
+    }
+    else if(computerSelection === "Rock" && humanSelection === "Paper"){
+        humanScore++;
+        score.textContent = "Human Score: " + humanScore + "Computer Score:" + computerScore;
+    }
+    else if(computerSelection === "Paper" && humanSelection === "Scissors"){
+        humanScore++;
+        score.textContent = "Human Score: " + humanScore + "Computer Score:" + computerScore;
+    }
+    else if(computerSelection === "Scissors" && humanSelection === "Rock"){
+        humanScore++;
+        score.textContent = "Human Score: " + humanScore + "Computer Score:" + computerScore;
+    }
+    else{
+        score.textContent = "Human Score: " + humanScore + "Computer Score:" + computerScore;
+    }
+
+    if(humanScore === 5 || computerScore === 5){
+        if(humanScore === 5){
+            score.textContent = "Human Wins!";
+        }
+        if(computerScore === 5){
+            score.textContent = "Computer Wins!"
+        }
+    }
+}
